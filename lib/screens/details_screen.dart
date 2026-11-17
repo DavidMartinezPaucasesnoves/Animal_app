@@ -6,18 +6,18 @@ class DetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: Canviar després per una instància de Peli
-    final Movie peli = ModalRoute.of(context)?.settings.arguments as Movie;
+    final Result animal = ModalRoute.of(context)?.settings.arguments as Result;
 
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          _CustomAppBar(movie: peli,),
+          _CustomAppBar(animal: animal,),
           SliverList(
             delegate: SliverChildListDelegate(
               [
-                _PosterAndTitile(movie: peli,),
-                _Overview(movie: peli),
-                CastingCards(peli.id),
+                _PosterAndTitle(animal: animal),
+                _Overview(animal: animal),
+                CastingCards(animal.id),
               ],
             ),
           ),
@@ -28,15 +28,15 @@ class DetailsScreen extends StatelessWidget {
 }
 
 class _CustomAppBar extends StatelessWidget {
-  final Movie movie;
+  final Result animal;
 
-  const _CustomAppBar({super.key, required this.movie});
+  const _CustomAppBar({super.key, required this.animal});
 
   @override
   Widget build(BuildContext context) {
     // Exactament igual que la AppBaer però amb bon comportament davant scroll
     return SliverAppBar(
-      backgroundColor: Colors.indigo,
+      backgroundColor: Colors.teal,
       expandedHeight: 200,
       floating: false,
       pinned: true,
@@ -49,13 +49,13 @@ class _CustomAppBar extends StatelessWidget {
           color: Colors.black12,
           padding: const EdgeInsets.only(bottom: 10),
           child: Text(
-            movie.title,
+            animal.displayName,
             style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
           ),
         ),
         background: FadeInImage(
           placeholder: AssetImage('assets/loading.gif'),
-          image: NetworkImage(movie.fullPosterPath),
+          image: NetworkImage(animal.fullPosterPath),
           fit: BoxFit.cover,
         ),
       ),
@@ -64,9 +64,9 @@ class _CustomAppBar extends StatelessWidget {
 }
 
 class _PosterAndTitile extends StatelessWidget {
-  final Movie movie;
+  final Result animal;
 
-  const _PosterAndTitile({super.key, required this.movie});
+  const _PosterAndTitile({super.key, required this.animal});
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +80,7 @@ class _PosterAndTitile extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             child: FadeInImage(
               placeholder: AssetImage('assets/loading.gif'),
-              image: NetworkImage(movie.fullPosterPath),
+              image: NetworkImage(animal.fullPosterPath),
               height: 150,
             ),
           ),
@@ -90,13 +90,13 @@ class _PosterAndTitile extends StatelessWidget {
           Column(
             children: [
               Text(
-                movie.title,
+                animal.displayName,
                 style: textTheme.headlineSmall,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
               ),
               Text(
-                movie.originalTitle,
+                animal.name,
                 style: textTheme.titleMedium,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
@@ -105,7 +105,7 @@ class _PosterAndTitile extends StatelessWidget {
                 children: [
                   const Icon(Icons.star_outline, size: 15, color: Colors.grey),
                   const SizedBox(width: 5),
-                  Text(movie.voteAverage.toString(), style: textTheme.bodySmall),
+                  Text(animal.iconicTaxonName ?? 'Animalia', style: textTheme.bodySmall),
                 ],
               )
             ],
@@ -117,16 +117,16 @@ class _PosterAndTitile extends StatelessWidget {
 }
 
 class _Overview extends StatelessWidget {
-  final Movie movie;
+  final Result animal;
 
-  const _Overview({super.key, required this.movie});
+  const _Overview({super.key, required this.animal});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Text(
-        movie.overview,
+        animal.descriptionText,
         textAlign: TextAlign.justify,
         style: Theme.of(context).textTheme.titleMedium,
       ),
