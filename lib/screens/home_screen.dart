@@ -23,10 +23,10 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             children: [
               // Targetes principals
-              CardSwiper(movies: moviesProvider.onDisplayAnimals),
+              CardSwiper(animals: moviesProvider.onDisplayAnimals),
 
               // Slider de pel·licules
-              MovieSlider(movies: moviesProvider.onPopularAnimals),
+              AnimalSlider(animals: moviesProvider.onPopularAnimals),
               // Poodeu fer la prova d'afegir-ne uns quants, veureu com cada llista és independent
               // MovieSlider(),
               // MovieSlider(),
