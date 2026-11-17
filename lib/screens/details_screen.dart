@@ -63,10 +63,10 @@ class _CustomAppBar extends StatelessWidget {
   }
 }
 
-class _PosterAndTitile extends StatelessWidget {
+class _PosterAndTitle extends StatelessWidget {
   final Result animal;
 
-  const _PosterAndTitile({super.key, required this.animal});
+  const _PosterAndTitle({super.key, required this.animal});
 
   @override
   Widget build(BuildContext context) {
