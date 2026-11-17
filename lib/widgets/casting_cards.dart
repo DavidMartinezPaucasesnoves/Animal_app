@@ -4,19 +4,19 @@ import 'package:provider/provider.dart';
 
 import '../models/models.dart';
 
-class CastingCards extends StatelessWidget {
+class AnimalCards extends StatelessWidget {
 
-  final int idMovie;
+  final int idAnimal;
 
-  const CastingCards(this.idMovie);
+  const AnimalCards(this.idAnimal);
 
   @override
   Widget build(BuildContext context) {
 
-    final moviesProvider = Provider.of<MoviesProvider>(context, listen: false);
+    final animalProvider = Provider.of<MoviesProvider>(context, listen: false);
     return FutureBuilder(
-      future: moviesProvider.getMovieCast(idMovie),
-      builder: (BuildContext context, AsyncSnapshot<List<Cast>> snapshot) {
+      future: animalProvider.getAnimalObservations(idAnimal),
+      builder: (BuildContext context, AsyncSnapshot<List<Observation>> snapshot) {
         if (!snapshot.hasData) {
           return Container(
             child: Center(
@@ -35,7 +35,7 @@ class CastingCards extends StatelessWidget {
           child: ListView.builder(
               itemCount: 10,
               scrollDirection: Axis.horizontal,
-              itemBuilder: (BuildContext context, int index) => _CastCard(cast: casting[index])),
+              itemBuilder: (BuildContext context, int index) => _AnimalCard(animal: casting[index])),
         );
 
       },
@@ -44,13 +44,13 @@ class CastingCards extends StatelessWidget {
   }
 }
 
-class _CastCard extends StatelessWidget {
+class _AnimalCard extends StatelessWidget {
 
-  final Cast cast;
+  final Observation animal;
 
-  const _CastCard({
+  const _AnimalCard({
     Key? key, 
-    required this.cast 
+    required this.animal 
   }) : super(key : key);
 
 
@@ -68,7 +68,7 @@ class _CastCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             child: FadeInImage(
               placeholder: AssetImage('assets/no-image.jpg'),
-              image: NetworkImage(cast.fullProfilePath),
+              image: NetworkImage(animal.fullPhotoUrl),
               height: 140,
               width: 100,
               fit: BoxFit.cover,
@@ -78,7 +78,7 @@ class _CastCard extends StatelessWidget {
             height: 5,
           ),
           Text(
-            cast.name,
+            animal.placeGuess ?? animal.userName,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,

@@ -17,7 +17,7 @@ class DetailsScreen extends StatelessWidget {
               [
                 _PosterAndTitle(animal: animal),
                 _Overview(animal: animal),
-                CastingCards(animal.id),
+                AnimalCards(animal.id),
               ],
             ),
           ),

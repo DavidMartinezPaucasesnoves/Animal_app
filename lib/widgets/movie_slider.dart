@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import '../models/models.dart';
 
-class MovieSlider extends StatelessWidget {
+class AnimalSlider extends StatelessWidget {
   // const MovieSlider({Key? key}) : super(key: key);
 
-  final List<Movie> movies;
+  final List<Result> animals;
 
-  const MovieSlider({
+  const AnimalSlider({
     Key? key, 
-    required this.movies 
+    required this.animals 
   }) : super(key : key);
 
   @override
@@ -29,8 +29,8 @@ class MovieSlider extends StatelessWidget {
           Expanded(
             child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: movies.length,
-                itemBuilder: (_, int index) => _MoviePoster(movie: movies[index])),
+                itemCount: animals.length,
+                itemBuilder: (_, int index) => _MoviePoster(animal: animals[index])),
           )
         ],
       ),
@@ -40,11 +40,11 @@ class MovieSlider extends StatelessWidget {
 
 class _MoviePoster extends StatelessWidget {
 
-  final Movie movie;
+  final Result animal;
 
   const _MoviePoster({
     Key? key, 
-    required this.movie 
+    required this.animal 
   }) : super(key : key);
 
   @override
@@ -58,12 +58,12 @@ class _MoviePoster extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () => Navigator.pushNamed(context, 'details',
-                arguments: movie),
+                arguments: animal),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: FadeInImage(
                 placeholder: AssetImage('assets/no-image.jpg'),
-                image: NetworkImage(movie.fullPosterPath),
+                image: NetworkImage(animal.fullPosterPath),
                 width: 130,
                 height: 190,
                 fit: BoxFit.cover,
@@ -74,7 +74,7 @@ class _MoviePoster extends StatelessWidget {
             height: 5,
           ),
           Text(
-            movie.title,
+            animal.displayName,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,
